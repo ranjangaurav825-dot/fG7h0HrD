@@ -1,603 +1,1240 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevPortfolio | Senior Full Stack Developer</title>
-    
-    <!-- Tailwind CSS (via CDN for standalone usage) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FontAwesome for Icons -->
+    <title>Nivesh Care | India's Most Trusted Investment Website </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Configuration for Tailwind -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#3b82f6', // blue-500
-                        secondary: '#1e293b', // slate-800
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom Styles & Animations */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-
-        .project-card:hover .project-overlay {
-            opacity: 1;
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-
-        /* Toast Notification */
-        #toast-container {
+        
+        .hindi {
+            font-family: 'Hind', sans-serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Language Toggle */
+        .language-toggle {
             position: fixed;
-            bottom: 20px;
+            top: 20px;
             right: 20px;
-            z-index: 50;
+            z-index: 1001;
+            background: white;
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 5px;
         }
-        .toast {
-            transform: translateX(100%);
-            transition: transform 0.3s ease-out;
+        
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 50px;
+            background: transparent;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
         }
-        .toast.show {
-            transform: translateX(0);
+        
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            z-index: 1002;
+        }
+        
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 32px;
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1002;
+            width: 40px;
+            height: 40px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin: 0;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .btn-login {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-login:hover {
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+        
+        .btn-signup {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* FIXED: Mobile Buttons Container */
+        .mobile-buttons-container {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .mobile-buttons-container .btn {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 16px;
+            justify-content: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-title .highlight {
+            color: var(--primary);
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 90%;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero {
+            padding: 14px 32px;
+            font-size: 18px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-text {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 5px solid white;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 30px;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .pricing-tables {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            position: relative;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .pricing-header h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .price span {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: normal;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-features li i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        
+        .pricing-features li.disabled {
+            color: #9ca3af;
+        }
+        
+        .pricing-features li.disabled i {
+            color: #9ca3af;
+        }
+        
+        .pricing-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        
+        .pricing-button:hover {
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-contact li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #d1d5db;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9ca3af;
+            font-size: 14px;
+        }
+        
+        /* FIXED: Language Content Management */
+        .en-content {
+            display: block;
+        }
+        
+        .hi-content {
+            display: none !important;
+        }
+        
+        body.hindi-mode .en-content {
+            display: none !important;
+        }
+        
+        body.hindi-mode .hi-content {
+            display: block !important;
+        }
+        
+        /* Mobile Responsive Styles - FIXED */
+        @media (max-width: 992px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-subtitle {
+                max-width: 100%;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 85%;
+                max-width: 320px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 100px 25px 30px;
+                box-shadow: var(--shadow-lg);
+                transition: left 0.4s ease;
+                z-index: 999;
+                justify-content: flex-start;
+                gap: 0;
+                overflow-y: auto;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                width: 100%;
+                text-align: left;
+                margin: 0;
+            }
+            
+            .nav-links a {
+                padding: 16px 0;
+                justify-content: flex-start;
+                border-bottom: 1px solid #e5e7eb;
+                width: 100%;
+                font-size: 17px;
+                font-weight: 500;
+            }
+            
+            .nav-links a i {
+                width: 24px;
+                text-align: center;
+            }
+            
+            .header-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 998;
+            }
+            
+            .mobile-menu-overlay.active {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn-hero {
+                width: 100%;
+                max-width: 320px;
+                padding: 16px 24px;
+                font-size: 17px;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 25px;
+            }
+            
+            .language-toggle {
+                top: 15px;
+                right: 65px;
+                z-index: 1003;
+                padding: 6px;
+            }
+            
+            .lang-btn {
+                padding: 7px 14px;
+                font-size: 14px;
+            }
+            
+            /* FIXED: Mobile buttons container - Now properly showing */
+            .mobile-buttons-container {
+                display: flex !important;
+                margin-top: 25px;
+                padding-top: 25px;
+                border-top: 1px solid #e5e7eb;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 30px;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .btn-hero {
+                padding: 15px 20px;
+                font-size: 16px;
+                max-width: 100%;
+            }
+            
+            .stat-number {
+                font-size: 30px;
+            }
+            
+            .stat-text {
+                font-size: 13px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .section-title p {
+                font-size: 16px;
+            }
+            
+            .language-toggle {
+                right: 60px;
+                padding: 5px;
+            }
+            
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .logo-text {
+                font-size: 24px;
+            }
+            
+            .logo-icon {
+                font-size: 28px;
+            }
+            
+            .nav-links {
+                width: 80%;
+                padding: 90px 20px 25px;
+            }
+            
+            .nav-links a {
+                font-size: 16px;
+                padding: 14px 0;
+            }
+            
+            .mobile-buttons-container .btn {
+                padding: 15px 20px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 26px;
+            }
+            
+            .btn-hero {
+                padding: 14px 18px;
+                font-size: 15px;
+            }
+            
+            .language-toggle {
+                right: 55px;
+            }
+            
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+<body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button class="lang-btn active" id="englishBtn">EN</button>
+        <button class="lang-btn" id="hindiBtn">हिंदी</button>
+    </div>
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md fixed w-full z-40 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="#" class="text-2xl font-bold text-slate-800">Dev<span class="text-blue-500">Portfolio</span>.</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="hover:text-blue-500 transition">Home</a>
-                    <a href="#about" class="hover:text-blue-500 transition">About</a>
-                    <a href="#skills" class="hover:text-blue-500 transition">Skills</a>
-                    <a href="#projects" class="hover:text-blue-500 transition">Projects</a>
-                    <a href="#experience" class="hover:text-blue-500 transition">Experience</a>
-                    <a href="#contact" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">Contact</a>
-                </div>
-                <!-- Mobile menu button -->
-                <div class="flex items-center md:hidden">
-                    <button id="mobile-menu-btn" class="text-slate-800 hover:text-blue-500 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#home" class="block px-3 py-2 rounded-md hover:bg-slate-100">Home</a>
-                <a href="#about" class="block px-3 py-2 rounded-md hover:bg-slate-100">About</a>
-                <a href="#projects" class="block px-3 py-2 rounded-md hover:bg-slate-100">Projects</a>
-                <a href="#contact" class="block px-3 py-2 text-blue-500 font-bold">Contact Me</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
 
-    <!-- Main Content -->
-    <main class="flex-grow">
-
-        <!-- Hero Section -->
-        <section id="home" class="pt-32 pb-20 md:pt-48 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center">
-            <div class="md:w-1/2 mt-10 md:mt-0 fade-in">
-                <h2 class="text-xl font-semibold text-blue-500 mb-2">Hello, I'm</h2>
-                <h1 class="text-5xl md:text-6xl font-bold text-slate-900 mb-4">Alex Dev</h1>
-                <p class="text-xl text-slate-600 mb-8">A passionate Senior Full Stack Developer specializing in Laravel, Vue, and modern web experiences.</p>
-                <div class="flex gap-4">
-                    <a href="#projects" class="px-8 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition transform hover:-translate-y-1">View Work</a>
-                    <a href="#contact" class="px-8 py-3 bg-white border border-slate-300 text-slate-700 font-semibold rounded-lg shadow hover:bg-slate-50 transition">Contact Me</a>
-                </div>
-            </div>
-            <div class="md:w-1/2 flex justify-center">
-                <!-- Placeholder for Hero Image -->
-                <div class="w-64 h-64 md:w-96 md:h-96 rounded-full bg-slate-200 overflow-hidden shadow-2xl border-4 border-white">
-                    <img src="https://picsum.photos/seed/developer/800/800" alt="Profile" class="w-full h-full object-cover">
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-20 bg-white">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl font-bold text-slate-900 mb-6">About Me</h2>
-                <p class="text-lg text-slate-600 leading-relaxed mb-8">
-                    With over 7 years of experience in web development, I bridge the gap between robust backend architecture and elegant frontend design. 
-                    My journey started with simple HTML pages and evolved into building complex enterprise applications using Laravel and scalable SQL databases. 
-                    I believe in writing clean, maintainable code and creating user-centric digital solutions.
-                </p>
-                <a href="#experience" class="text-blue-500 font-semibold hover:underline">See my full experience &rarr;</a>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="py-20 bg-slate-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-slate-900 text-center mb-12">Technical Skills</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <!-- Skill Item -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition text-center">
-                        <i class="fab fa-php text-4xl text-indigo-600 mb-3"></i>
-                        <h3 class="font-semibold">PHP</h3>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition text-center">
-                        <i class="fab fa-laravel text-4xl text-red-600 mb-3"></i>
-                        <h3 class="font-semibold">Laravel</h3>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition text-center">
-                        <i class="fab fa-js text-4xl text-yellow-400 mb-3"></i>
-                        <h3 class="font-semibold">JavaScript</h3>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition text-center">
-                        <i class="fas fa-database text-4xl text-blue-800 mb-3"></i>
-                        <h3 class="font-semibold">MySQL</h3>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition text-center">
-                        <i class="fab fa-html5 text-4xl text-orange-500 mb-3"></i>
-                        <h3 class="font-semibold">HTML5</h3>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition text-center">
-                        <i class="fab fa-css3-alt text-4xl text-blue-500 mb-3"></i>
-                        <h3 class="font-semibold">CSS3</h3>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition text-center">
-                        <i class="fab fa-git-alt text-4xl text-red-500 mb-3"></i>
-                        <h3 class="font-semibold">Git</h3>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition text-center">
-                        <i class="fab fa-docker text-4xl text-blue-400 mb-3"></i>
-                        <h3 class="font-semibold">Docker</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section (Dynamic) -->
-        <section id="projects" class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-end mb-12">
-                    <div>
-                        <h2 class="text-3xl font-bold text-slate-900">Featured Projects</h2>
-                        <p class="text-slate-500 mt-2">Some of my recent work built with Laravel & Vue.</p>
-                    </div>
-                </div>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-chart-line logo-icon"></i>
+                <div class="logo-text">NiveshCare</div>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li>
+                    <a href="#home" class="en-content"><i class="fas fa-home"></i> Home</a>
+                    <a href="#home" class="hi-content"><i class="fas fa-home"></i> होम</a>
+                </li>
+                <li>
+                    <a href="#features" class="en-content"><i class="fas fa-star"></i> Features</a>
+                    <a href="#features" class="hi-content"><i class="fas fa-star"></i> विशेषताएं</a>
+                </li>
+                <li>
+                    <a href="#pricing" class="en-content"><i class="fas fa-tags"></i> Pricing</a>
+                    <a href="#pricing" class="hi-content"><i class="fas fa-tags"></i> मूल्य निर्धारण</a>
+                </li>
+                <li>
+                    <a href="#contact" class="en-content"><i class="fas fa-phone"></i> Contact</a>
+                    <a href="#contact" class="hi-content"><i class="fas fa-phone"></i> संपर्क करें</a>
+                </li>
                 
-                <!-- Projects Grid Container -->
-                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Projects will be injected here via JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience & Education -->
-        <section id="experience" class="py-20 bg-slate-50">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-slate-900 text-center mb-12">Experience & Education</h2>
-                
-                <div class="relative border-l-2 border-slate-200 ml-4 md:ml-0 space-y-10">
+                <!-- FIXED: Mobile Buttons Container -->
+                <div class="mobile-buttons-container">
+                    <a href="https://niveshcare.in/user/login" class="btn btn-login en-content">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="https://niveshcare.in/user/login" class="btn btn-login hi-content">
+                        <i class="fas fa-sign-in-alt"></i> लॉग इन
+                    </a>
                     
-                    <!-- Experience 1 -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:flex items-center justify-between">
-                            <div class="absolute -left-[9px] bg-blue-500 h-4 w-4 rounded-full border-2 border-white"></div>
-                            <div class="md:w-5/12 md:text-right mb-2 md:mb-0">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Work</span>
-                                <h3 class="text-xl font-bold text-slate-900">Senior Web Developer</h3>
-                                <p class="text-slate-600 font-medium">TechSolutions Inc.</p>
-                            </div>
-                            <div class="md:w-2/12 text-sm text-slate-500 font-mono text-center">2020 - Present</div>
-                            <div class="md:w-5/12 text-slate-600 text-sm">
-                                Leading a team of 5 developers, architecting scalable Laravel applications, and implementing CI/CD pipelines.
-                            </div>
-                        </div>
-                    </div>
+                    <a href="https://niveshcare.in/user/register" class="btn btn-signup en-content">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </a>
+                    <a href="https://niveshcare.in/user/register" class="btn btn-signup hi-content">
+                        <i class="fas fa-user-plus"></i> साइन अप
+                    </a>
+                </div>
+            </ul>
+            
+            <!-- Desktop Buttons -->
+            <div class="header-buttons">
+                <a href="https://niveshcare.in/user/login" class="btn btn-login en-content">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+                <a href="https://niveshcare.in/user/login" class="btn btn-login hi-content">
+                    <i class="fas fa-sign-in-alt"></i> लॉग इन
+                </a>
+                
+                <a href="https://niveshcare.in/user/register" class="btn btn-signup en-content">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </a>
+                <a href="https://niveshcare.in/user/register" class="btn btn-signup hi-content">
+                    <i class="fas fa-user-plus"></i> साइन अप
+                </a>
+            </div>
+        </div>
+    </header>
 
-                    <!-- Experience 2 -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:flex items-center justify-between">
-                            <div class="absolute -left-[9px] bg-blue-500 h-4 w-4 rounded-full border-2 border-white"></div>
-                            <div class="md:w-5/12 md:text-right mb-2 md:mb-0">
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Work</span>
-                                <h3 class="text-xl font-bold text-slate-900">Full Stack Developer</h3>
-                                <p class="text-slate-600 font-medium">CreativeAgency</p>
-                            </div>
-                            <div class="md:w-2/12 text-sm text-slate-500 font-mono text-center">2017 - 2020</div>
-                            <div class="md:w-5/12 text-slate-600 text-sm">
-                                Developed custom WordPress plugins and Laravel-based CRM systems for various clients.
-                            </div>
-                        </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title en-content">
+                    Smart Investing for <span class="highlight">Every Indian</span>
+                </h1>
+                <h1 class="hero-title hi-content">
+                    <span class="highlight">हर भारतीय</span> के लिए स्मार्ट निवेश
+                </h1>
+                
+                <p class="hero-subtitle en-content">
+                    Join over 50 thousand Indians who trust NiveshCare to grow their wealth. Access expert insights, automated portfolios, and tools designed for the Indian market.
+                </p>
+                <p class="hero-subtitle hi-content">
+                    उन 50 हजार से अधिक भारतीयों में शामिल हों जो अपनी संपत्ति बढ़ाने के लिए निवेशकेयर पर भरोसा करते हैं। विशेषज्ञ अंतर्दृष्टि, स्वचालित पोर्टफोलियो और भारतीय बाजार के लिए डिज़ाइन किए गए टूल तक पहुंचें।
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="https://niveshcare.in/user/register" class="btn btn-signup btn-hero en-content">
+                        <i class="fas fa-play-circle"></i> Signup Get ₹10 
+                    </a>
+                    <a href="https://niveshcare.in/user/register" class="btn btn-signup btn-hero hi-content">
+                        <i class="fas fa-play-circle"></i> साइनअप करें और ₹10 पाएं
+                    </a>
+                    
+                    <a href="#pricing" class="btn btn-login btn-hero en-content">
+                        <i class="fas fa-video"></i> Pricing
+                    </a>
+                    <a href="#features" class="btn btn-login btn-hero hi-content">
+                        <i class="fas fa-video"></i> मूल्य निर्धारण
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-text en-content">Investors</div>
+                        <div class="stat-text hi-content">निवेशक</div>
                     </div>
-
-                    <!-- Education -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:flex items-center justify-between">
-                            <div class="absolute -left-[9px] bg-slate-400 h-4 w-4 rounded-full border-2 border-white"></div>
-                            <div class="md:w-5/12 md:text-right mb-2 md:mb-0">
-                                <span class="inline-block bg-slate-200 text-slate-700 text-xs px-2 py-1 rounded-full">Education</span>
-                                <h3 class="text-xl font-bold text-slate-900">B.Sc. Computer Science</h3>
-                                <p class="text-slate-600 font-medium">University of Technology</p>
-                            </div>
-                            <div class="md:w-2/12 text-sm text-slate-500 font-mono text-center">2013 - 2017</div>
-                            <div class="md:w-5/12 text-slate-600 text-sm">
-                                Graduated with Honors. Specialized in Software Engineering and Database Systems.
-                            </div>
-                        </div>
+                    <div class="stat-item">
+                        <div class="stat-number">₹5Cr+</div>
+                        <div class="stat-text en-content">Assets Managed</div>
+                        <div class="stat-text hi-content">प्रबंधित संपत्ति</div>
                     </div>
-
+                    <div class="stat-item">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-text en-content">Satisfied Customers</div>
+                        <div class="stat-text hi-content">संतुष्ट ग्राहक</div>
+                    </div>
                 </div>
             </div>
-        </section>
+            
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="निवेश डैशबोर्ड">
+            </div>
+        </div>
+    </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-white">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold text-slate-900 text-center mb-8">Get In Touch</h2>
-                <div class="bg-slate-50 p-8 rounded-2xl shadow-lg border border-slate-100">
-                    <form id="contact-form" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-slate-700">Name</label>
-                                <input type="text" id="name" required class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
-                                <input type="email" id="email" required class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition">
-                            </div>
-                        </div>
-                        <div>
-                            <label for="subject" class="block text-sm font-medium text-slate-700">Subject</label>
-                            <input type="text" id="subject" required class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition">
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-slate-700">Message</label>
-                            <textarea id="message" rows="4" required class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-md hover:bg-blue-700 transition transform active:scale-95">Send Message</button>
-                    </form>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="en-content">Why Choose <span class="highlight">NiveshCare</span>?</h2>
+                <h2 class="hi-content">क्यों चुनें <span class="highlight">निवेशकेयर</span>?</h2>
+                <p class="en-content">Designed specifically for Indian investors with unique needs and goals</p>
+                <p class="hi-content">भारतीय निवेशकों की विशिष्ट आवश्यकताओं और लक्ष्यों के लिए विशेष रूप से डिज़ाइन किया गया</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3 class="en-content">Low Minimum Investment</h3>
+                    <h3 class="hi-content">कम न्यूनतम निवेश</h3>
+                    <p class="en-content">Start investing with just ₹100. Flexible options with SIP, lumpsum, and more.</p>
+                    <p class="hi-content">मात्र ₹100 से निवेश शुरू करें। एसआईपी, लम्पसम और अधिक के साथ लचीले विकल्प।</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="en-content">Bank-Level Security</h3>
+                    <h3 class="hi-content">बैंक-स्तरीय सुरक्षा</h3>
+                    <p class="en-content">Your investments are protected with 256-bit encryption and 2FA authentication.</p>
+                    <p class="hi-content">आपका निवेश 256-बिट एन्क्रिप्शन और 2FA प्रमाणीकरण के साथ सुरक्षित है।</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="en-content">Multi-Language Support</h3>
+                    <h3 class="hi-content">बहुभाषी समर्थन</h3>
+                    <p class="en-content">Available in Hindi, English, Tamil, Telugu, Marathi and other Indian languages.</p>
+                    <p class="hi-content">हिंदी, अंग्रेजी, तमिल, तेलुगु, मराठी और अन्य भारतीय भाषाओं में उपलब्ध।</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="en-content">Lowest, <span class="highlight">Investment Pricing</span></h2>
+                <h2 class="hi-content">सबसे कम, <span class="highlight">निवेश मूल्य निर्धारण</span></h2>
+                <p class="en-content">Choose the plan that fits your investment goals. No hidden fees, no surprises.</p>
+                <p class="hi-content">अपने निवेश लक्ष्यों के अनुरूप योजना चुनें। कोई छिपे हुए शुल्क नहीं, कोई आश्चर्य नहीं।</p>
+            </div>
+            
+            <div class="pricing-tables">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="en-content">Basic</h3>
+                        <h3 class="hi-content">बेसिक</h3>
+                        <div class="price">₹100<span class="en-content">/month</span><span class="hi-content">/माह</span></div>
+                        <p class="en-content">For beginners starting their investment journey</p>
+                        <p class="hi-content">अपनी निवेश यात्रा शुरू करने वाले शुरुआती लोगों के लिए</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <span class="en-content">Up to ₹1,000 Profit</span><span class="hi-content">₹1,000 तक लाभ</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">No Hidden Charges</span><span class="hi-content">कोई छिपे हुए शुल्क नहीं</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">Daily Profit Updates</span><span class="hi-content">दैनिक लाभ अपडेट</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">Email support</span><span class="hi-content">ईमेल समर्थन</span></li>
+                        <li class="disabled"><i class="fas fa-times"></i> <span class="en-content">High Withdrawal fee</span><span class="hi-content">उच्च निकासी शुल्क</span></li>
+                        <li class="disabled"><i class="fas fa-times"></i> <span class="en-content">No Free Tour Chance</span><span class="hi-content">मुफ्त टूर का अवसर नहीं</span></li>
+                    </ul>
+                    <a href="https://niveshcare.in/user/register" class="pricing-button en-content">Get Started Free</a>
+                    <a href="https://niveshcare.in/user/registerhttps://niveshcare.in/user/register" class="pricing-button hi-content">मुफ्त शुरू करें</a>
+                </div>
+                
+                <!-- Pro Plan (Popular) -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge en-content">MOST POPULAR</div>
+                    <div class="popular-badge hi-content">सबसे लोकप्रिय</div>
+                    <div class="pricing-header">
+                        <h3 class="en-content">Pro</h3>
+                        <h3 class="hi-content">प्रो</h3>
+                        <div class="price">₹1000<span class="en-content">/month</span><span class="hi-content">/माह</span></div>
+                        <p class="en-content">For serious investors looking to maximize returns</p>
+                        <p class="hi-content">रिटर्न को अधिकतम करने की तलाश में गंभीर निवेशकों के लिए</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <span class="en-content">Up to ₹10,000 investments</span><span class="hi-content">₹10,000 तक निवेश</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">No Hidden Charges</span><span class="hi-content">कोई छिपे हुए शुल्क नहीं</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">Daily Profit Updaate</span><span class="hi-content">दैनिक लाभ अपडेट</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">Support Available</span><span class="hi-content">समर्थन उपलब्ध</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">Medium Withdrawal Fee</span><span class="hi-content">मध्यम निकासी शुल्क</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">Free Tour Chance</span><span class="hi-content">मुफ्त टूर का अवसर</span></li>
+                    </ul>
+                    <a href="https://niveshcare.in/user/register" class="pricing-button en-content">Upgrade to Pro</a>
+                    <a href="https://niveshcare.in/user/register" class="pricing-button hi-content">प्रो में अपग्रेड करें</a>
+                </div>
+                
+                <!-- Premium Plan -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="en-content">Premium</h3>
+                        <h3 class="hi-content">प्रीमियम</h3>
+                        <div class="price">₹5000<span class="en-content">/month</span><span class="hi-content">/माह</span></div>
+                        <p class="en-content">For high-net-worth investors</p>
+                        <p class="hi-content">उच्च निवल मूल्य वाले निवेशकों के लिए</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> <span class="en-content">Up to ₹50,000 investments</span><span class="hi-content">₹50,000 तक निवेश</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">Daily Profit Update</span><span class="hi-content">दैनिक लाभ अपडेट</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">No Hidden Charges</span><span class="hi-content">कोई छिपे हुए शुल्क नहीं</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">24/7 Support Available</span><span class="hi-content">24/7 समर्थन उपलब्ध</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">Low Withdrawal Fee</span><span class="hi-content">कम निकासी शुल्क</span></li>
+                        <li><i class="fas fa-check"></i> <span class="en-content">Free Tour Chance</span><span class="hi-content">मुफ्त टूर का अवसर</span></li>
+                    </ul>
+                    <a href="https://niveshcare.in/user/register" class="pricing-button en-content">Go Premium</a>
+                    <a href="https://niveshcare.in/user/register" class="pricing-button hi-content">प्रीमियम चुनें</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0">
-                <span class="text-2xl font-bold">Dev<span class="text-blue-500">Portfolio</span>.</span>
-                <p class="text-slate-400 text-sm mt-2">Building the web, one line at a time.</p>
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <a href="?" class="logo" style="margin-bottom: 20px; display: inline-block;">
+                        <i class="fas fa-chart-line" style="color: white; font-size: 28px;"></i>
+                        <div style="display: inline-block; vertical-align: middle;">
+                            <div style="font-size: 24px; font-weight: 700; color: white;">NiveshCare</div>
+                            <div style="color: #d1d5db; font-size: 12px; margin-top: -5px;" class="en-content">India's Trusted Investment Platform</div>
+                            <div style="color: #d1d5db; font-size: 12px; margin-top: -5px;" class="hi-content">भारत का विश्वसनीय निवेश प्लेटफॉर्म</div>
+                        </div>
+                    </a>
+                    <p style="color: #d1d5db; margin-bottom: 20px;" class="en-content">Making investing simple, accessible, and effective for every Indian.</p>
+                    <p style="color: #d1d5db; margin-bottom: 20px;" class="hi-content">हर भारतीय के लिए निवेश को सरल, सुलभ और प्रभावी बनाना।</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="en-content">Quick Links</h3>
+                    <h3 class="hi-content">त्वरित लिंक</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="en-content">Home</a><a href="#home" class="hi-content">होम</a></li>
+                        <li><a href="#features" class="en-content">Features</a><a href="#features" class="hi-content">विशेषताएं</a></li>
+                        <li><a href="#pricing" class="en-content">Pricing</a><a href="#pricing" class="hi-content">मूल्य निर्धारण</a></li>
+                        <li><a href="#contact" class="en-content">Contact Us</a><a href="#contact" class="hi-content">संपर्क करें</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="en-content">Legal</h3>
+                    <h3 class="hi-content">कानूनी</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="en-content">Privacy Policy</a><a href="#" class="hi-content">गोपनीयता नीति</a></li>
+                        <li><a href="#" class="en-content">Terms of Service</a><a href="#" class="hi-content">सेवा की शर्तें</a></li>
+                        <li><a href="#" class="en-content">Risk Disclosure</a><a href="#" class="hi-content">जोखिम प्रकटीकरण</a></li>
+                        <li><a href="#" class="en-content">Compliance</a><a href="#" class="hi-content">अनुपालन</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="en-content">Contact Us</h3>
+                    <h3 class="hi-content">संपर्क करें</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> support@niveshcare.com</li>
+                        <li><i class="fas fa-phone"></i> +91 1800-123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> मुंबई, महाराष्ट्र, भारत</li>
+                        <li style="margin-top: 20px;">
+                            <a href="#" style="margin-right: 15px; color: white; font-size: 20px;"><i class="fab fa-facebook"></i></a>
+                            <a href="#" style="margin-right: 15px; color: white; font-size: 20px;"><i class="fab fa-twitter"></i></a>
+                            <a href="#" style="margin-right: 15px; color: white; font-size: 20px;"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" style="color: white; font-size: 20px;"><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="flex space-x-6">
-                <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-github fa-lg"></i></a>
-                <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-linkedin fa-lg"></i></a>
-                <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-twitter fa-lg"></i></a>
+            
+            <div class="copyright">
+                <p class="en-content">© 2025 NiveshCare. All rights reserved. SEBI Registration No: INZ000123456 | Investments are subject to market risks, read all documents carefully.</p>
+                <p class="hi-content">© 2025 निवेशकेयर. सर्वाधिकार सुरक्षित। SEBI पंजीकरण संख्या: INZ000123456 | निवेश बाजार जोखिमों के अधीन है, सभी दस्तावेज ध्यान से पढ़ें।</p>
             </div>
-        </div>
-        <div class="text-center mt-8 text-slate-500 text-sm">
-            &copy; 2023 Alex Dev. All rights reserved. | 
-            <button onclick="openAdminModal()" class="text-slate-600 hover:text-white transition underline">Admin Login</button>
         </div>
     </footer>
 
-    <!-- Toast Container -->
-    <div id="toast-container"></div>
-
-    <!-- ADMIN LOGIN MODAL -->
-    <div id="admin-login-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 backdrop-blur-sm">
-        <div class="bg-white rounded-lg p-8 w-full max-w-md shadow-2xl relative">
-            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button>
-            <h2 class="text-2xl font-bold mb-6 text-slate-800">Admin Login</h2>
-            <form id="login-form" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Username</label>
-                    <input type="text" id="username" class="mt-1 w-full border border-slate-300 rounded px-3 py-2 focus:ring-blue-500 focus:border-blue-500" placeholder="admin">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Password</label>
-                    <input type="password" id="password" class="mt-1 w-full border border-slate-300 rounded px-3 py-2 focus:ring-blue-500 focus:border-blue-500" placeholder="password">
-                </div>
-                <button type="submit" class="w-full bg-slate-800 text-white py-2 rounded hover:bg-slate-900 transition">Login</button>
-            </form>
-            <p class="text-xs text-slate-500 mt-4 text-center">Hint: use <b>admin</b> / <b>password</b></p>
-        </div>
-    </div>
-
-    <!-- ADMIN DASHBOARD MODAL -->
-    <div id="admin-dashboard-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 backdrop-blur-sm overflow-y-auto">
-        <div class="bg-white rounded-lg w-full max-w-4xl my-8 shadow-2xl relative flex flex-col max-h-[90vh]">
-            <!-- Dashboard Header -->
-            <div class="p-6 border-b flex justify-between items-center bg-slate-50 rounded-t-lg">
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-800">Project Management</h2>
-                    <p class="text-sm text-slate-500">CRUD Interface Simulation</p>
-                </div>
-                <button onclick="closeDashboard()" class="text-slate-500 hover:text-red-500 font-medium">Close & Logout</button>
-            </div>
-            
-            <div class="p-6 overflow-y-auto flex-grow">
-                <!-- Add New Project Form -->
-                <div class="bg-blue-50 p-4 rounded-lg mb-8 border border-blue-100">
-                    <h3 class="font-bold text-blue-800 mb-3">Add New Project</h3>
-                    <form id="add-project-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="new-title" placeholder="Project Title" required class="px-3 py-2 border rounded focus:ring-blue-500">
-                        <input type="text" id="new-tags" placeholder="Tags (comma separated)" required class="px-3 py-2 border rounded focus:ring-blue-500">
-                        <textarea id="new-desc" placeholder="Description" required class="md:col-span-2 px-3 py-2 border rounded focus:ring-blue-500"></textarea>
-                        <button type="submit" class="md:col-span-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Add to Database</button>
-                    </form>
-                </div>
-
-                <!-- Projects Table -->
-                <h3 class="font-bold text-slate-800 mb-3">Existing Projects</h3>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-slate-200">
-                        <thead class="bg-slate-100">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Title</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Tech Stack</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-project-list" class="bg-white divide-y divide-slate-200">
-                            <!-- JS Injected Rows -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- DATA LAYER (Simulating MySQL Database) ---
-        const initialProjects = [
-            {
-                id: 1,
-                title: "E-Commerce Platform",
-                description: "A full-featured online store built with Laravel 9 and Stripe integration. Includes inventory management, user auth, and an admin dashboard.",
-                image: "https://picsum.photos/seed/ecommerce/600/400",
-                tags: ["Laravel", "MySQL", "Stripe", "Tailwind"],
-                link: "#"
-            },
-            {
-                id: 2,
-                title: "Task Management API",
-                description: "A RESTful API for a Kanban-style task application. Features JWT authentication, real-time notifications via Pusher, and comprehensive unit tests.",
-                image: "https://picsum.photos/seed/taskapi/600/400",
-                tags: ["PHP", "Laravel", "REST", "PHPUnit"],
-                link: "#"
-            },
-            {
-                id: 3,
-                title: "Corporate Website",
-                description: "Responsive corporate landing page with a dynamic CMS backend built for a logistics company. SEO optimized and fast loading.",
-                image: "https://picsum.photos/seed/corporate/600/400",
-                tags: ["HTML", "SASS", "JS", "Laravel CMS"],
-                link: "#"
+        // Language Toggle
+        const englishBtn = document.getElementById('englishBtn');
+        const hindiBtn = document.getElementById('hindiBtn');
+        const body = document.body;
+        
+        // Set initial language to English
+        body.classList.remove('hindi-mode');
+        
+        function setLanguage(lang) {
+            if (lang === 'english') {
+                body.classList.remove('hindi-mode');
+                englishBtn.classList.add('active');
+                hindiBtn.classList.remove('active');
+                localStorage.setItem('niveshcare-language', 'english');
+            } else {
+                body.classList.add('hindi-mode');
+                hindiBtn.classList.add('active');
+                englishBtn.classList.remove('active');
+                localStorage.setItem('niveshcare-language', 'hindi');
             }
-        ];
-
-        // Load from "Database" (LocalStorage or Default)
-        let projects = JSON.parse(localStorage.getItem('myPortfolioProjects')) || initialProjects;
-
-        // --- DOM ELEMENTS ---
-        const projectsGrid = document.getElementById('projects-grid');
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navbar = document.getElementById('navbar');
-        const adminLoginModal = document.getElementById('admin-login-modal');
-        const adminDashboardModal = document.getElementById('admin-dashboard-modal');
-        const adminProjectList = document.getElementById('admin-project-list');
-
-        // --- INITIAL RENDER ---
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProjects();
-            renderAdminTable();
-            setupScrollEffect();
-        });
-
-        // --- VIEW LOGIC ---
-
-        // 1. Render Projects to Frontend
-        function renderProjects() {
-            projectsGrid.innerHTML = projects.map(project => `
-                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 project-card group border border-slate-100">
-                    <div class="relative overflow-hidden h-48">
-                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300 project-overlay">
-                            <a href="${project.link}" class="bg-white text-slate-900 px-6 py-2 rounded-full font-bold hover:bg-blue-500 hover:text-white transition">View Demo</a>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            ${project.tags.map(tag => `<span class="text-xs font-medium bg-blue-50 text-blue-600 px-2 py-1 rounded">${tag}</span>`).join('')}
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">${project.title}</h3>
-                        <p class="text-slate-600 text-sm line-clamp-3">${project.description}</p>
-                    </div>
-                </div>
-            `).join('');
         }
-
-        // 2. Render Admin Table
-        function renderAdminTable() {
-            adminProjectList.innerHTML = projects.map(project => `
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">#${project.id}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">${project.title}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">${project.tags.join(', ')}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button onclick="deleteProject(${project.id})" class="text-red-600 hover:text-red-900 bg-red-50 px-3 py-1 rounded transition">Delete</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        // 3. Mobile Menu Toggle
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        
+        englishBtn.addEventListener('click', () => {
+            setLanguage('english');
         });
-
-        // 4. Navbar Scroll Effect
-        function setupScrollEffect() {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 10) {
-                    navbar.classList.add('py-0', 'shadow-lg');
-                } else {
-                    navbar.classList.remove('py-0', 'shadow-lg');
+        
+        hindiBtn.addEventListener('click', () => {
+            setLanguage('hindi');
+        });
+        
+        // Load saved language preference
+        const savedLang = localStorage.getItem('niveshcare-language');
+        if (savedLang === 'hindi') {
+            setLanguage('hindi');
+        }
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        
+        function toggleMobileMenu() {
+            navLinks.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+            
+            // Prevent body scroll when menu is open
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileOverlay.addEventListener('click', toggleMobileMenu);
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a, .mobile-buttons-container a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Only prevent default for same-page anchors
+                if (href !== '#' && !href.includes('.html')) {
+                    e.preventDefault();
+                    
+                    const targetId = href;
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        navLinks.classList.remove('active');
+                        mobileOverlay.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        document.body.style.overflow = 'auto';
+                    }
                 }
             });
-        }
-
-        // --- CONTACT FORM HANDLING (Simulating Backend) ---
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button');
-            const originalText = btn.innerText;
-            
-            // Loading State
-            btn.innerText = 'Sending...';
-            btn.disabled = true;
-            btn.classList.add('opacity-75');
-
-            // Simulate Network Delay
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.disabled = false;
-                btn.classList.remove('opacity-75');
-                this.reset();
-                showToast('Message sent successfully! I will get back to you soon.', 'success');
-            }, 1500);
         });
-
-        // --- ADMIN PANEL LOGIC (Simulating Auth & CRUD) ---
-
-        // Open Login
-        function openAdminModal() {
-            adminLoginModal.classList.remove('hidden');
-            adminLoginModal.classList.add('flex');
-        }
-
-        // Close Login
-        function closeAdminModal() {
-            adminLoginModal.classList.add('hidden');
-            adminLoginModal.classList.remove('flex');
-            document.getElementById('login-form').reset();
-        }
-
-        // Close Dashboard
-        function closeDashboard() {
-            adminDashboardModal.classList.add('hidden');
-            adminDashboardModal.classList.remove('flex');
-        }
-
-        // Handle Login Submit
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
-
-            if (user === 'admin' && pass === 'password') {
-                showToast('Login Successful', 'success');
-                closeAdminModal();
-                adminDashboardModal.classList.remove('hidden');
-                adminDashboardModal.classList.add('flex');
+        
+        // Fix for mobile buttons visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure mobile buttons are properly shown/hidden based on language
+            const mobileLoginEn = document.querySelector('.mobile-buttons-container .btn-login.en-content');
+            const mobileLoginHi = document.querySelector('.mobile-buttons-container .btn-login.hi-content');
+            const mobileSignupEn = document.querySelector('.mobile-buttons-container .btn-signup.en-content');
+            const mobileSignupHi = document.querySelector('.mobile-buttons-container .btn-signup.hi-content');
+            
+            if (body.classList.contains('hindi-mode')) {
+                if (mobileLoginEn) mobileLoginEn.style.display = 'none';
+                if (mobileLoginHi) mobileLoginHi.style.display = 'flex';
+                if (mobileSignupEn) mobileSignupEn.style.display = 'none';
+                if (mobileSignupHi) mobileSignupHi.style.display = 'flex';
             } else {
-                showToast('Invalid Credentials. Try admin/password', 'error');
+                if (mobileLoginEn) mobileLoginEn.style.display = 'flex';
+                if (mobileLoginHi) mobileLoginHi.style.display = 'none';
+                if (mobileSignupEn) mobileSignupEn.style.display = 'flex';
+                if (mobileSignupHi) mobileSignupHi.style.display = 'none';
             }
         });
-
-        // Handle Add Project (Create)
-        document.getElementById('add-project-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const title = document.getElementById('new-title').value;
-            const tagsStr = document.getElementById('new-tags').value;
-            const desc = document.getElementById('new-desc').value;
-            
-            const newProject = {
-                id: Date.now(), // Generate random ID
-                title: title,
-                description: desc,
-                image: `https://picsum.photos/seed/${title}/600/400`, // Generate random image based on title
-                tags: tagsStr.split(',').map(t => t.trim()),
-                link: '#'
-            };
-
-            projects.unshift(newProject); // Add to beginning of array
-            saveData();
-            renderProjects();
-            renderAdminTable();
-            document.getElementById('add-project-form').reset();
-            showToast('Project added successfully', 'success');
-        });
-
-        // Handle Delete Project (Delete)
-        window.deleteProject = function(id) {
-            if(confirm('Are you sure you want to delete this project?')) {
-                projects = projects.filter(p => p.id !== id);
-                saveData();
-                renderProjects();
-                renderAdminTable();
-                showToast('Project deleted', 'success');
-            }
-        }
-
-        // Persist to LocalStorage (Simulating DB Save)
-        function saveData() {
-            localStorage.setItem('myPortfolioProjects', JSON.stringify(projects));
-        }
-
-        // --- UTILITY: Toast Notification ---
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            
-            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
-            const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
-
-            toast.className = `toast flex items-center w-full max-w-xs p-4 mb-4 text-white rounded-lg shadow dark:text-gray-400 ${bgColor}`;
-            toast.innerHTML = `
-                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-white bg-opacity-20">
-                    <i class="fas fa-${icon}"></i>
-                </div>
-                <div class="ml-3 text-sm font-normal">${message}</div>
-            `;
-
-            container.appendChild(toast);
-
-            // Trigger animation
-            setTimeout(() => toast.classList.add('show'), 100);
-
-            // Remove after 3 seconds
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
     </script>
 </body>
 </html>
