@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Resume | India's Most Trusted Investment Websiteम</title>
+    <title>Resume | India's Most Trusted Investment Website</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,11 +90,6 @@
             50% { transform: translateY(-10px); }
         }
         
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-        
         .animate-fadeIn {
             animation: fadeIn 0.8s ease-out;
         }
@@ -115,7 +110,7 @@
             animation: float 5s ease-in-out infinite;
         }
         
-        /* Language Toggle */
+        /* Language Toggle - FIXED */
         .language-toggle {
             position: fixed;
             top: 20px;
@@ -206,7 +201,7 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
-        /* Mobile Menu Toggle */
+        /* Mobile Menu Toggle - FIXED */
         .mobile-menu-btn {
             display: none;
             background: var(--gradient-primary);
@@ -532,42 +527,6 @@
             transform: scale(1.05);
         }
         
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.4;
-            z-index: 0;
-        }
-        
-        .float-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            top: 10%;
-            left: 5%;
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .float-2 {
-            width: 200px;
-            height: 200px;
-            background: var(--secondary);
-            bottom: 20%;
-            right: 10%;
-            animation: float 10s ease-in-out infinite reverse;
-        }
-        
-        .float-3 {
-            width: 150px;
-            height: 150px;
-            background: var(--accent);
-            top: 40%;
-            right: 20%;
-            animation: float 12s ease-in-out infinite;
-        }
-        
         /* Features Section */
         .features {
             padding: 100px 0;
@@ -743,20 +702,25 @@
             box-shadow: 0 25px 60px rgba(37, 99, 235, 0.2);
         }
         
+        /* FIXED: Popular Badge - अब सही से दिखेगा */
         .popular-badge {
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--gradient-primary);
             color: white;
-            padding: 10px 30px;
+            padding: 10px 25px;
             border-radius: 50px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             box-shadow: var(--shadow);
             letter-spacing: 0.5px;
             z-index: 2;
+            white-space: nowrap;
+            max-width: 90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .pricing-header {
@@ -1262,7 +1226,7 @@
             box-shadow: var(--shadow-md);
         }
         
-        /* Mobile Responsive Styles */
+        /* Mobile Responsive Styles - FIXED */
         @media (max-width: 1200px) {
             .hero-container {
                 gap: 40px;
@@ -1456,6 +1420,13 @@
                 padding-top: 30px;
                 border-top: 2px solid var(--gray-light);
             }
+            
+            /* FIXED: Popular badge for mobile */
+            .popular-badge {
+                font-size: 13px;
+                padding: 8px 20px;
+                top: -10px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1491,6 +1462,8 @@
             
             .language-toggle {
                 right: 70px;
+                top: 15px;
+                padding: 5px;
             }
             
             .lang-btn {
@@ -1540,6 +1513,13 @@
             .legal-header h1 {
                 font-size: 34px;
             }
+            
+            /* FIXED: Popular badge for small screens */
+            .popular-badge {
+                font-size: 12px;
+                padding: 7px 16px;
+                top: -10px;
+            }
         }
         
         @media (max-width: 400px) {
@@ -1554,23 +1534,31 @@
             
             .language-toggle {
                 right: 65px;
+                top: 15px;
             }
             
             .lang-btn {
                 padding: 6px 12px;
                 font-size: 13px;
             }
+            
+            /* FIXED: Popular badge for extra small screens */
+            .popular-badge {
+                font-size: 11px;
+                padding: 6px 14px;
+                top: -8px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Language Toggle -->
+    <!-- Language Toggle - FIXED -->
     <div class="language-toggle">
         <button class="lang-btn active" id="englishBtn">EN</button>
         <button class="lang-btn" id="hindiBtn">हिंदी</button>
     </div>
 
-    <!-- Mobile Menu Overlay -->
+    <!-- Mobile Menu Overlay - FIXED -->
     <div class="mobile-menu-overlay" id="mobileOverlay"></div>
 
     <!-- Header -->
@@ -1635,16 +1623,14 @@
                 </a>
                 <a href="/" class="btn btn-signup hi-content">
                     <i class="fas fa-user-plus"></i> साइन अप
-                    </a>
+                </a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="float-1"></div>
-        <div class="float-2"></div>
-        <div class="float-3"></div>
+        <!-- Floating elements removed as requested -->
         
         <div class="container hero-container">
             <div class="hero-content animate-slideInLeft">
@@ -1656,10 +1642,10 @@
                 </h1>
                 
                 <p class="hero-subtitle en-content">
-                    Join over 50 thousand Indians who trust NiveshCare to grow their wealth. Access expert insights, automated portfolios, and tools designed for the Indian market.
+                    Join over 50 thousand Indians who trust Resume to grow their wealth. Access expert insights, automated portfolios, and tools designed for the Indian market.
                 </p>
                 <p class="hero-subtitle hi-content">
-                    उन 50 हजार से अधिक भारतीयों में शामिल हों जो अपनी संपत्ति बढ़ाने के लिए निवेशकेयर पर भरोसा करते हैं। विशेषज्ञ अंतर्दृष्टि, स्वचालित पोर्टफोलियो और भारतीय बाजार के लिए डिज़ाइन किए गए टूल तक पहुंचें।
+                    उन 50 हजार से अधिक भारतीयों में शामिल हों जो अपनी संपत्ति बढ़ाने के लिए रिज्यूम पर भरोसा करते हैं। विशेषज्ञ अंतर्दृष्टि, स्वचालित पोर्टफोलियो और भारतीय बाजार के लिए डिज़ाइन किए गए टूल तक पहुंचें।
                 </p>
                 
                 <div class="hero-buttons">
@@ -1707,8 +1693,8 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-title animate-fadeIn">
-                <h2 class="en-content">Why Choose <span class="highlight">NiveshCare</span>?</h2>
-                <h2 class="hi-content">क्यों चुनें <span class="highlight">निवेशकेयर</span>?</h2>
+                <h2 class="en-content">Why Choose <span class="highlight">Resume</span>?</h2>
+                <h2 class="hi-content">क्यों चुनें <span class="highlight">रिज्यूम</span>?</h2>
                 <p class="en-content">Designed specifically for Indian investors with unique needs and goals</p>
                 <p class="hi-content">भारतीय निवेशकों की विशिष्ट आवश्यकताओं और लक्ष्यों के लिए विशेष रूप से डिज़ाइन किया गया</p>
             </div>
@@ -1779,7 +1765,7 @@
                     <a href="" class="pricing-button hi-content">मुफ्त शुरू करें</a>
                 </div>
                 
-                <!-- Pro Plan (Popular) -->
+                <!-- Pro Plan (Popular) - FIXED: Popular badge -->
                 <div class="pricing-card popular animate-fadeIn" style="animation-delay: 0.2s;">
                     <div class="popular-badge en-content">MOST POPULAR</div>
                     <div class="popular-badge hi-content">सबसे लोकप्रिय</div>
@@ -1852,8 +1838,8 @@
                             <div class="contact-text">
                                 <h4 class="en-content">Our Office</h4>
                                 <h4 class="hi-content">हमारा कार्यालय</h4>
-                                <p class="en-content">NiveshCare Tower, Bandra Kurla Complex, Mumbai, Maharashtra 400051</p>
-                                <p class="hi-content">निवेशकेयर टावर, बांद्रा कुर्ला कॉम्प्लेक्स, मुंबई, महाराष्ट्र 400051</p>
+                                <p class="en-content">Resume Tower, Bandra Kurla Complex, Mumbai, Maharashtra 400051</p>
+                                <p class="hi-content">रिज्यूम टावर, बांद्रा कुर्ला कॉम्प्लेक्स, मुंबई, महाराष्ट्र 400051</p>
                             </div>
                         </li>
                         <li>
@@ -1874,8 +1860,8 @@
                             <div class="contact-text">
                                 <h4 class="en-content">Email Address</h4>
                                 <h4 class="hi-content">ईमेल पता</h4>
-                                <p class="en-content">support@niveshcare.com<br>invest@niveshcare.com</p>
-                                <p class="hi-content">support@niveshcare.com<br>invest@niveshcare.com</p>
+                                <p class="en-content">support@resume.com<br>invest@resume.com</p>
+                                <p class="hi-content">support@resume.com<br>invest@resume.com</p>
                             </div>
                         </li>
                     </ul>
@@ -1986,7 +1972,7 @@
                     <h3 class="en-content">Contact Us</h3>
                     <h3 class="hi-content">संपर्क करें</h3>
                     <ul class="footer-contact">
-                        <li><i class="fas fa-envelope"></i> support@niveshcare.com</li>
+                        <li><i class="fas fa-envelope"></i> support@resume.com</li>
                         <li><i class="fas fa-phone"></i> +91 1800-123-4567</li>
                         <li><i class="fas fa-map-marker-alt"></i> मुंबई, महाराष्ट्र, भारत</li>
                         <li><i class="fas fa-clock"></i> <span class="en-content">Mon-Sat: 9AM-8PM</span><span class="hi-content">सोम-शनि: सुबह 9-शाम 8</span></li>
@@ -1995,8 +1981,8 @@
             </div>
             
             <div class="copyright">
-                <p class="en-content">© 2023 NiveshCare. All rights reserved. SEBI Registration No: INZ000123456 | Investments are subject to market risks, read all documents carefully. | CIN: U67190MH2023PTC123456</p>
-                <p class="hi-content">© 2023 निवेशकेयर. सर्वाधिकार सुरक्षित। SEBI पंजीकरण संख्या: INZ000123456 | निवेश बाजार जोखिमों के अधीन है, सभी दस्तावेज ध्यान से पढ़ें। | CIN: U67190MH2023PTC123456</p>
+                <p class="en-content">© 2023 Resume. All rights reserved. SEBI Registration No: INZ000123456 | Investments are subject to market risks, read all documents carefully. | CIN: U67190MH2023PTC123456</p>
+                <p class="hi-content">© 2023 रिज्यूम. सर्वाधिकार सुरक्षित। SEBI पंजीकरण संख्या: INZ000123456 | निवेश बाजार जोखिमों के अधीन है, सभी दस्तावेज ध्यान से पढ़ें। | CIN: U67190MH2023PTC123456</p>
             </div>
         </div>
     </footer>
@@ -2011,7 +1997,7 @@
     </div>
 
     <script>
-        // Language Toggle
+        // Language Toggle - FIXED
         const englishBtn = document.getElementById('englishBtn');
         const hindiBtn = document.getElementById('hindiBtn');
         const body = document.body;
@@ -2024,13 +2010,41 @@
                 body.classList.remove('hindi-mode');
                 englishBtn.classList.add('active');
                 hindiBtn.classList.remove('active');
-                localStorage.setItem('niveshcare-language', 'english');
+                localStorage.setItem('resume-language', 'english');
             } else {
                 body.classList.add('hindi-mode');
                 hindiBtn.classList.add('active');
                 englishBtn.classList.remove('active');
-                localStorage.setItem('niveshcare-language', 'hindi');
+                localStorage.setItem('resume-language', 'hindi');
             }
+            
+            // Update all elements with language-specific content
+            updateLanguageVisibility();
+        }
+        
+        function updateLanguageVisibility() {
+            const isHindi = body.classList.contains('hindi-mode');
+            
+            // Update all language-specific elements
+            document.querySelectorAll('.en-content, .hi-content').forEach(el => {
+                if (el.classList.contains('en-content')) {
+                    el.style.display = isHindi ? 'none' : 'block';
+                }
+                if (el.classList.contains('hi-content')) {
+                    el.style.display = isHindi ? 'block' : 'none';
+                }
+            });
+            
+            // Update mobile buttons visibility
+            const mobileLoginEn = document.querySelector('.mobile-buttons-container .btn-login.en-content');
+            const mobileLoginHi = document.querySelector('.mobile-buttons-container .btn-login.hi-content');
+            const mobileSignupEn = document.querySelector('.mobile-buttons-container .btn-signup.en-content');
+            const mobileSignupHi = document.querySelector('.mobile-buttons-container .btn-signup.hi-content');
+            
+            if (mobileLoginEn) mobileLoginEn.style.display = isHindi ? 'none' : 'flex';
+            if (mobileLoginHi) mobileLoginHi.style.display = isHindi ? 'flex' : 'none';
+            if (mobileSignupEn) mobileSignupEn.style.display = isHindi ? 'none' : 'flex';
+            if (mobileSignupHi) mobileSignupHi.style.display = isHindi ? 'flex' : 'none';
         }
         
         englishBtn.addEventListener('click', () => {
@@ -2042,28 +2056,29 @@
         });
         
         // Load saved language preference
-        const savedLang = localStorage.getItem('niveshcare-language');
+        const savedLang = localStorage.getItem('resume-language');
         if (savedLang === 'hindi') {
             setLanguage('hindi');
+        } else {
+            setLanguage('english');
         }
         
-        // Mobile Menu Toggle
+        // Mobile Menu Toggle - FIXED
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
         const mobileOverlay = document.getElementById('mobileOverlay');
         
         function toggleMobileMenu() {
-            navLinks.classList.toggle('active');
+            const isActive = navLinks.classList.toggle('active');
             mobileOverlay.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+            mobileMenuBtn.innerHTML = isActive ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             
             // Prevent body scroll when menu is open
-            if (navLinks.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
+            document.body.style.overflow = isActive ? 'hidden' : 'auto';
+            
+            // Update language visibility when menu opens
+            if (isActive) {
+                updateLanguageVisibility();
             }
         }
         
@@ -2157,7 +2172,7 @@
                         </div>
                         
                         <div class="legal-content en-content">
-                            <p>This Privacy Policy describes how NiveshCare ("we", "us", or "our") collects, uses, and shares your personal information when you use our investment platform.</p>
+                            <p>This Privacy Policy describes how Resume ("we", "us", or "our") collects, uses, and shares your personal information when you use our investment platform.</p>
                             
                             <h2>Information We Collect</h2>
                             <p>We collect information you provide directly to us, such as when you create an account, make investments, or contact us for support. This may include:</p>
@@ -2193,7 +2208,7 @@
                             <p>You have the right to access, correct, or delete your personal information. You may also withdraw consent for certain data processing activities.</p>
                             
                             <h2>Contact Us</h2>
-                            <p>If you have questions about this Privacy Policy, please contact us at privacy@niveshcare.com.</p>
+                            <p>If you have questions about this Privacy Policy, please contact us at privacy@resume.com.</p>
                         </div>
                     `,
                     hi: {
@@ -2207,7 +2222,7 @@
                         </div>
                         
                         <div class="legal-content hi-content">
-                            <p>यह गोपनीयता नीति बताती है कि निवेशकेयर ("हम", "हमारा") आपके निजी जानकारी को कैसे एकत्र करता है, उपयोग करता है और साझा करता है जब आप हमारे निवेश प्लेटफॉर्म का उपयोग करते हैं।</p>
+                            <p>यह गोपनीयता नीति बताती है कि रिज्यूम ("हम", "हमारा") आपके निजी जानकारी को कैसे एकत्र करता है, उपयोग करता है और साझा करता है जब आप हमारे निवेश प्लेटफॉर्म का उपयोग करते हैं।</p>
                             
                             <h2>जानकारी जो हम एकत्र करते हैं</h2>
                             <p>हम वह जानकारी एकत्र करते हैं जो आप सीधे हमें प्रदान करते हैं, जैसे कि जब आप खाता बनाते हैं, निवेश करते हैं, या सहायता के लिए हमसे संपर्क करते हैं। इसमें शामिल हो सकता है:</p>
@@ -2243,7 +2258,7 @@
                             <p>आपको अपनी निजी जानकारी तक पहुंचने, सही करने या हटाने का अधिकार है। आप कुछ डेटा प्रसंस्करण गतिविधियों के लिए सहमति भी वापस ले सकते हैं।</p>
                             
                             <h2>हमसे संपर्क करें</h2>
-                            <p>यदि आपके पास इस गोपनीयता नीति के बारे में प्रश्न हैं, तो कृपया हमसे privacy@niveshcare.com पर संपर्क करें।</p>
+                            <p>यदि आपके पास इस गोपनीयता नीति के बारे में प्रश्न हैं, तो कृपया हमसे privacy@resume.com पर संपर्क करें।</p>
                         </div>
                         `
                     }
@@ -2260,10 +2275,10 @@
                         </div>
                         
                         <div class="legal-content en-content">
-                            <p>Welcome to NiveshCare. These Terms of Service govern your use of our investment platform and services.</p>
+                            <p>Welcome to Resume. These Terms of Service govern your use of our investment platform and services.</p>
                             
                             <h2>Acceptance of Terms</h2>
-                            <p>By accessing or using NiveshCare, you agree to be bound by these Terms. If you do not agree, you may not use our services.</p>
+                            <p>By accessing or using Resume, you agree to be bound by these Terms. If you do not agree, you may not use our services.</p>
                             
                             <h2>Eligibility</h2>
                             <p>You must be at least 18 years old and a resident of India to use our services. You must have the legal capacity to enter into binding contracts.</p>
@@ -2281,7 +2296,7 @@
                             <p>We may suspend or terminate your access to our services if you violate these Terms or for any other reason at our discretion.</p>
                             
                             <h2>Limitation of Liability</h2>
-                            <p>To the maximum extent permitted by law, NiveshCare shall not be liable for any indirect, incidental, or consequential damages arising from your use of our services.</p>
+                            <p>To the maximum extent permitted by law, Resume shall not be liable for any indirect, incidental, or consequential damages arising from your use of our services.</p>
                             
                             <h2>Governing Law</h2>
                             <p>These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law principles.</p>
@@ -2298,10 +2313,10 @@
                         </div>
                         
                         <div class="legal-content hi-content">
-                            <p>निवेशकेयर में आपका स्वागत है। ये सेवा की शर्तें हमारे निवेश प्लेटफॉर्म और सेवाओं के आपके उपयोग को नियंत्रित करती हैं।</p>
+                            <p>रिज्यूम में आपका स्वागत है। ये सेवा की शर्तें हमारे निवेश प्लेटफॉर्म और सेवाओं के आपके उपयोग को नियंत्रित करती हैं।</p>
                             
                             <h2>शर्तों की स्वीकृति</h2>
-                            <p>निवेशकेयर तक पहुंचकर या उपयोग करके, आप इन शर्तों से बंधने के लिए सहमत होते हैं। यदि आप सहमत नहीं हैं, तो आप हमारी सेवाओं का उपयोग नहीं कर सकते।</p>
+                            <p>रिज्यूम तक पहुंचकर या उपयोग करके, आप इन शर्तों से बंधने के लिए सहमत होते हैं। यदि आप सहमत नहीं हैं, तो आप हमारी सेवाओं का उपयोग नहीं कर सकते।</p>
                             
                             <h2>पात्रता</h2>
                             <p>हमारी सेवाओं का उपयोग करने के लिए आपकी आयु कम से कम 18 वर्ष होनी चाहिए और आप भारत के निवासी होने चाहिए। आपके पास बाध्यकारी अनुबंध करने की कानूनी क्षमता होनी चाहिए।</p>
@@ -2319,7 +2334,7 @@
                             <p>यदि आप इन शर्तों का उल्लंघन करते हैं या हमारे विवेक पर किसी अन्य कारण से, हम आपकी हमारी सेवाओं तक पहुंच को निलंबित या समाप्त कर सकते हैं।</p>
                             
                             <h2>दायित्व सीमा</h2>
-                            <p>कानून द्वारा अनुमत अधिकतम सीमा तक, निवेशकेयर हमारी सेवाओं के आपके उपयोग से उत्पन्न होने वाले किसी भी अप्रत्यक्ष, आकस्मिक या परिणामी नुकसान के लिए उत्तरदायी नहीं होगा।</p>
+                            <p>कानून द्वारा अनुमत अधिकतम सीमा तक, रिज्यूम हमारी सेवाओं के आपके उपयोग से उत्पन्न होने वाले किसी भी अप्रत्यक्ष, आकस्मिक या परिणामी नुकसान के लिए उत्तरदायी नहीं होगा।</p>
                             
                             <h2>शासी कानून</h2>
                             <p>ये शर्तें भारत के कानूनों के अनुसार शासित और व्याख्या की जाएंगी, इसके संघर्ष कानून सिद्धांतों की परवाह किए बिना।</p>
@@ -2363,7 +2378,7 @@
                             <p>Changes in laws or regulations may adversely affect investments.</p>
                             
                             <h2>No Guarantee</h2>
-                            <p>NiveshCare does not guarantee any returns on investments. All investment decisions are made at your own risk.</p>
+                            <p>Resume does not guarantee any returns on investments. All investment decisions are made at your own risk.</p>
                             
                             <h2>Past Performance</h2>
                             <p>Past performance is not indicative of future results. Historical data should not be relied upon as an indicator of future performance.</p>
@@ -2407,7 +2422,7 @@
                             <p>कानूनों या विनियमों में परिवर्तन निवेशों पर प्रतिकूल प्रभाव डाल सकता है।</p>
                             
                             <h2>कोई गारंटी नहीं</h2>
-                            <p>निवेशकेयर निवेश पर किसी भी रिटर्न की गारंटी नहीं देता है। सभी निवेश निर्णय आपके अपने जोखिम पर किए जाते हैं।</p>
+                            <p>रिज्यूम निवेश पर किसी भी रिटर्न की गारंटी नहीं देता है। सभी निवेश निर्णय आपके अपने जोखिम पर किए जाते हैं।</p>
                             
                             <h2>पिछला प्रदर्शन</h2>
                             <p>पिछला प्रदर्शन भविष्य के परिणामों का संकेत नहीं है। ऐतिहासिक डेटा पर भविष्य के प्रदर्शन के संकेतक के रूप में भरोसा नहीं किया जाना चाहिए।</p>
@@ -2430,10 +2445,10 @@
                         </div>
                         
                         <div class="legal-content en-content">
-                            <p>NiveshCare operates in full compliance with all applicable laws and regulations governing investment services in India.</p>
+                            <p>Resume operates in full compliance with all applicable laws and regulations governing investment services in India.</p>
                             
                             <h2>Regulatory Registration</h2>
-                            <p>NiveshCare is registered with the Securities and Exchange Board of India (SEBI) as an Investment Advisor under Registration No. INA000123456.</p>
+                            <p>Resume is registered with the Securities and Exchange Board of India (SEBI) as an Investment Advisor under Registration No. INA000123456.</p>
                             
                             <h2>AML & KYC Compliance</h2>
                             <p>We adhere to strict Anti-Money Laundering (AML) and Know Your Customer (KYC) guidelines as prescribed by regulatory authorities.</p>
@@ -2457,7 +2472,7 @@
                             <p>Investors may lodge complaints through our dedicated grievance redressal mechanism. We aim to resolve all complaints within 30 days.</p>
                             
                             <h2>Contact for Compliance Matters</h2>
-                            <p>For any compliance-related queries, please contact our Compliance Officer at compliance@niveshcare.com or call +91 22-98765432.</p>
+                            <p>For any compliance-related queries, please contact our Compliance Officer at compliance@resume.com or call +91 22-98765432.</p>
                         </div>
                     `,
                     hi: {
@@ -2471,10 +2486,10 @@
                         </div>
                         
                         <div class="legal-content hi-content">
-                            <p>निवेशकेयर भारत में निवेश सेवाओं को नियंत्रित करने वाले सभी लागू कानूनों और विनियमों के पूर्ण अनुपालन में संचालित होता है।</p>
+                            <p>रिज्यूम भारत में निवेश सेवाओं को नियंत्रित करने वाले सभी लागू कानूनों और विनियमों के पूर्ण अनुपालन में संचालित होता है।</p>
                             
                             <h2>नियामक पंजीकरण</h2>
-                            <p>निवेशकेयर भारतीय प्रतिभूति और विनिमय बोर्ड (सेबी) के साथ एक निवेश सलाहकार के रूप में पंजीकरण संख्या INA000123456 के तहत पंजीकृत है।</p>
+                            <p>रिज्यूम भारतीय प्रतिभूति और विनिमय बोर्ड (सेबी) के साथ एक निवेश सलाहकार के रूप में पंजीकरण संख्या INA000123456 के तहत पंजीकृत है।</p>
                             
                             <h2>एएमएल और केवाईसी अनुपालन</h2>
                             <p>हम नियामक प्राधिकारियों द्वारा निर्धारित सख्त एंटी-मनी लॉन्ड्रिंग (एएमएल) और नो योर कस्टमर (केवाईसी) दिशानिर्देशों का पालन करते हैं।</p>
@@ -2498,7 +2513,7 @@
                             <p>निवेशक हमारे समर्पित शिकायत निवारण तंत्र के माध्यम से शिकायत दर्ज कर सकते हैं। हम सभी शिकायतों को 30 दिनों के भीतर हल करने का लक्ष्य रखते हैं।</p>
                             
                             <h2>अनुपालन मामलों के लिए संपर्क</h2>
-                            <p>किसी भी अनुपालन-संबंधी प्रश्नों के लिए, कृपया हमारे अनुपालन अधिकारी से compliance@niveshcare.com पर संपर्क करें या +91 22-98765432 पर कॉल करें।</p>
+                            <p>किसी भी अनुपालन-संबंधी प्रश्नों के लिए, कृपया हमारे अनुपालन अधिकारी से compliance@resume.com पर संपर्क करें या +91 22-98765432 पर कॉल करें।</p>
                         </div>
                         `
                     }
@@ -2517,7 +2532,7 @@
             const title = isHindi ? page.hi.title : page.en.title;
             
             // Update the page title
-            document.title = title + " | निवेशकेयर";
+            document.title = title + " | Resume - India's Trusted Investment Website";
             
             // Hide main content and show legal page
             document.querySelector('header').style.display = 'none';
@@ -2544,17 +2559,7 @@
             legalContainer.style.display = 'block';
             
             // Apply language-specific display
-            if (isHindi) {
-                document.querySelectorAll('.legal-header .en-content').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.legal-header .hi-content').forEach(el => el.style.display = 'block');
-                document.querySelectorAll('.legal-content .en-content').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.legal-content .hi-content').forEach(el => el.style.display = 'block');
-            } else {
-                document.querySelectorAll('.legal-header .en-content').forEach(el => el.style.display = 'block');
-                document.querySelectorAll('.legal-header .hi-content').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.legal-content .en-content').forEach(el => el.style.display = 'block');
-                document.querySelectorAll('.legal-content .hi-content').forEach(el => el.style.display = 'none');
-            }
+            updateLanguageVisibility();
             
             // Scroll to top
             window.scrollTo({top: 0, behavior: 'smooth'});
@@ -2574,31 +2579,15 @@
             document.getElementById('legalPagesContainer').style.display = 'none';
             
             // Restore original title
-            document.title = "निवेशकेयर | भारत का विश्वसनीय निवेश प्लेटफॉर्म";
+            document.title = "Resume | India's Most Trusted Investment Website";
             
             // Scroll to top
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
         
-        // Fix for mobile buttons visibility
+        // Initialize language visibility on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Ensure mobile buttons are properly shown/hidden based on language
-            const mobileLoginEn = document.querySelector('.mobile-buttons-container .btn-login.en-content');
-            const mobileLoginHi = document.querySelector('.mobile-buttons-container .btn-login.hi-content');
-            const mobileSignupEn = document.querySelector('.mobile-buttons-container .btn-signup.en-content');
-            const mobileSignupHi = document.querySelector('.mobile-buttons-container .btn-signup.hi-content');
-            
-            if (body.classList.contains('hindi-mode')) {
-                if (mobileLoginEn) mobileLoginEn.style.display = 'none';
-                if (mobileLoginHi) mobileLoginHi.style.display = 'flex';
-                if (mobileSignupEn) mobileSignupEn.style.display = 'none';
-                if (mobileSignupHi) mobileSignupHi.style.display = 'flex';
-            } else {
-                if (mobileLoginEn) mobileLoginEn.style.display = 'flex';
-                if (mobileLoginHi) mobileLoginHi.style.display = 'none';
-                if (mobileSignupEn) mobileSignupEn.style.display = 'flex';
-                if (mobileSignupHi) mobileSignupHi.style.display = 'none';
-            }
+            updateLanguageVisibility();
         });
     </script>
 </body>
